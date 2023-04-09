@@ -5,25 +5,27 @@
 #include <string>
 
 namespace lve {
-	class Window {
-	public:
-		Window(int w, int h, std::string name);
-		~Window();
 
-		Window(const Window&) = delete;
-		Window& operator=(const Window&) = delete;
+class Window {
+public:
+	Window(int w, int h, std::string name);
+	~Window();
 
-		bool shouldClose() { return glfwWindowShouldClose(window); }
+	Window(const Window&) = delete;
+	Window& operator=(const Window&) = delete;
 
-		VkExtent2D getExtent() { return { static_cast<uint32_t>(width), static_cast<uint32_t>(height) }; }
+	bool shouldClose() { return glfwWindowShouldClose(window); }
+
+	VkExtent2D getExtent() { return { static_cast<uint32_t>(width), static_cast<uint32_t>(height) }; }
 		 
-		void createWindowSurface(VkInstance instanse, VkSurfaceKHR* surface);
+	void createWindowSurface(VkInstance instanse, VkSurfaceKHR* surface);
 
-	private:
-		void initWindow();
-		const int width;
-		const int height;
-		GLFWwindow* window;
-		std::string windowName;
-	};
+private:
+	void initWindow();
+	const int width;
+	const int height;
+	GLFWwindow* window;
+	std::string windowName;
+};
+
 }
