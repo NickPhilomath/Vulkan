@@ -1,0 +1,10 @@
+.vs
+
+bin
+bin-int
+
+*.rar
+*.zip
+
+# glfw and glm in libs for now
+libs
