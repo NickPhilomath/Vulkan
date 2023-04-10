@@ -17,7 +17,7 @@ class LveSwapChain {
     static constexpr int MAX_FRAMES_IN_FLIGHT = 2;
 
     LveSwapChain(lve::LveDevice& deviceRef, VkExtent2D windowExtent);
-    LveSwapChain(lve::LveDevice &deviceRef, VkExtent2D windowExtent, std::shared_ptr<LveSwapChain> previous);
+    LveSwapChain(lve::LveDevice& deviceRef, VkExtent2D windowExtent, std::shared_ptr<LveSwapChain> previous);
     ~LveSwapChain();
 
     LveSwapChain(const LveSwapChain &) = delete;

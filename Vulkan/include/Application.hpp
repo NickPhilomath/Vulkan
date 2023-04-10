@@ -38,7 +38,7 @@ private:
 	void recordCommandBuffer(int imageIndex);
 
 
-	Window lveWindow{WIDTH, HEIGHT, "hello nulkan!"};
+	Window lveWindow{WIDTH, HEIGHT, "hello pain in the ass!"};
 	LveDevice lveDevice{ lveWindow };
 	std::unique_ptr<LveSwapChain> lveSwapChain;
 	std::unique_ptr<PipeLine> lvePipeline;

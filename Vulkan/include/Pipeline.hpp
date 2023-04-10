@@ -29,6 +29,7 @@ class PipeLine {
 public:
 	PipeLine(LveDevice &device, const std::string& vertFilepath, const std::string& fragFilepath, const PipelineConfigInfo &configInfo);
 	~PipeLine();
+
 	PipeLine(const PipeLine&) = delete;
 	PipeLine& operator=(const PipeLine&) = delete;
 

@@ -369,8 +369,7 @@ SwapChainSupportDetails LveDevice::querySwapChainSupport(VkPhysicalDevice device
   return details;
 }
 
-VkFormat LveDevice::findSupportedFormat(
-    const std::vector<VkFormat> &candidates, VkImageTiling tiling, VkFormatFeatureFlags features) {
+VkFormat LveDevice::findSupportedFormat(const std::vector<VkFormat> &candidates, VkImageTiling tiling, VkFormatFeatureFlags features) {
   for (VkFormat format : candidates) {
     VkFormatProperties props;
     vkGetPhysicalDeviceFormatProperties(physicalDevice, format, &props);
