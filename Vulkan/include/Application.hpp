@@ -1,5 +1,9 @@
 #pragma once
 
+#define GLM_FORCE_RADIANS
+#define GLM_FORCE_DEPTH_ZERO_TO_ONE
+#include <glm/glm.hpp>
+
 #include "Window.hpp"
 #include "Pipeline.hpp"
 #include "lve_device.hpp"
@@ -9,34 +13,38 @@
 #include <vector>
 
 namespace lve {
-	class Application {
-	public:
-		static constexpr int WIDTH = 800;
-		static constexpr int HEIGHT = 600;
 
-		Application();
-		~Application();
+class Application {
+public:
+	static constexpr int WIDTH = 800;
+	static constexpr int HEIGHT = 600;
 
-		Application(const Window&) = delete;
-		Application& operator=(const Application&) = delete;
+	Application();
+	~Application();
 
-		void run();
+	Application(const Window&) = delete;
+	Application& operator=(const Application&) = delete;
 
-	private:
-		void loadModels();
-		void createPipeLineLayout();
-		void createPipeLine();
-		void createCommandBuffers();
-		void drawFrame();
+	void run();
+
+private:
+	void loadModels();
+	void createPipeLineLayout();
+	void createPipeLine();
+	void createCommandBuffers();
+	void freeCommandBuffers();
+	void drawFrame();
+	void recreateSwapChain();
+	void recordCommandBuffer(int imageIndex);
 
 
-		Window lveWindow{WIDTH, HEIGHT, "hello nulkan!"};
-		LveDevice lveDevice{ lveWindow };
-		LveSwapChain lveSwapChain{ lveDevice, lveWindow.getExtent() };
-		std::unique_ptr<PipeLine> lvePipeline;
-		//PipeLine lvePipeline{lveDevice, "shaders/simple_shader.vert.spv", "shaders/simple_shader.frag.spv", PipeLine::defaultPipelineConfigInfo(WIDTH, HEIGHT)};
-		VkPipelineLayout pipelineLayout;
-		std::vector<VkCommandBuffer> commandBuffers;
-		std::unique_ptr<LveModel> lveModel;
-	};
+	Window lveWindow{WIDTH, HEIGHT, "hello nulkan!"};
+	LveDevice lveDevice{ lveWindow };
+	std::unique_ptr<LveSwapChain> lveSwapChain;
+	std::unique_ptr<PipeLine> lvePipeline;
+	VkPipelineLayout pipelineLayout;
+	std::vector<VkCommandBuffer> commandBuffers;
+	std::unique_ptr<LveModel> lveModel;
+};
+
 }

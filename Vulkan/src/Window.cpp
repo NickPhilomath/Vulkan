@@ -12,12 +12,21 @@ Window::~Window() {
 	glfwTerminate();
 }
 
+void Window::framebufferResizedCallback(GLFWwindow* window, int width, int height) {
+	Window* lveWindow = reinterpret_cast<Window*>(glfwGetWindowUserPointer(window));
+	lveWindow->framebufferResized = true;
+	lveWindow->width = width;
+	lveWindow->height = height;
+}
+
 void Window::initWindow() {
 	glfwInit();
 	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+	glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
 
 	window = glfwCreateWindow(width, height, windowName.c_str(), nullptr, nullptr);
+	glfwSetWindowUserPointer(window, this);
+	glfwSetFramebufferSizeCallback(window, framebufferResizedCallback);
 }
 
 void Window::createWindowSurface(VkInstance instanse, VkSurfaceKHR* surface) {
