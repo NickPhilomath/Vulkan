@@ -169,6 +169,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Application.hpp" />
+    <ClInclude Include="include\lve_game_object.hpp" />
     <ClInclude Include="include\lve_model.hpp" />
     <ClInclude Include="include\lve_swap_chain.hpp" />
     <ClInclude Include="include\Pipeline.hpp" />

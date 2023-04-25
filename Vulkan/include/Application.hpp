@@ -3,14 +3,17 @@
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #include <glm/glm.hpp>
+#include <glm/gtc/constants.hpp>
+
+#include <memory>
+#include <vector>
 
 #include "Window.hpp"
 #include "Pipeline.hpp"
 #include "lve_device.hpp"
 #include "lve_swap_chain.hpp"
 #include "lve_model.hpp"
-#include <memory>
-#include <vector>
+#include "lve_game_object.hpp"
 
 namespace lve {
 
@@ -28,7 +31,7 @@ public:
 	void run();
 
 private:
-	void loadModels();
+	void loadGameObjects();
 	void createPipeLineLayout();
 	void createPipeLine();
 	void createCommandBuffers();
@@ -36,6 +39,7 @@ private:
 	void drawFrame();
 	void recreateSwapChain();
 	void recordCommandBuffer(int imageIndex);
+	void renderGameObjects(VkCommandBuffer commandBuffer);
 
 
 	Window lveWindow{WIDTH, HEIGHT, "hello pain in the ass!"};
@@ -44,7 +48,7 @@ private:
 	std::unique_ptr<PipeLine> lvePipeline;
 	VkPipelineLayout pipelineLayout;
 	std::vector<VkCommandBuffer> commandBuffers;
-	std::unique_ptr<LveModel> lveModel;
+	std::vector<LveGameObject> gameObjects;
 };
 
 }
