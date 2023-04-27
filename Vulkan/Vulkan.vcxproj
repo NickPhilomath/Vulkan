@@ -160,23 +160,27 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\lve_model.cpp" />
+    <ClCompile Include="src\lve_renderer.cpp" />
     <ClCompile Include="src\lve_swap_chain.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="src\Application.cpp" />
+    <ClCompile Include="src\first_app.cpp" />
     <ClCompile Include="src\lve_device.cpp" />
-    <ClCompile Include="src\Pipeline.cpp" />
-    <ClCompile Include="src\Window.cpp" />
+    <ClCompile Include="src\lve_pipeline.cpp" />
+    <ClCompile Include="src\simple_render_system.cpp" />
+    <ClCompile Include="src\lve_window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Application.hpp" />
+    <ClInclude Include="include\first_app.hpp" />
     <ClInclude Include="include\lve_game_object.hpp" />
     <ClInclude Include="include\lve_model.hpp" />
+    <ClInclude Include="include\lve_renderer.hpp" />
     <ClInclude Include="include\lve_swap_chain.hpp" />
-    <ClInclude Include="include\Pipeline.hpp" />
+    <ClInclude Include="include\lve_pipeline.hpp" />
+    <ClInclude Include="include\simple_render_system.hpp" />
     <ClInclude Include="include\stb_image.h" />
     <ClInclude Include="include\tiny_obj_loader.h" />
     <ClInclude Include="include\tiny_obj_loader_latest.h" />
-    <ClInclude Include="include\Window.hpp" />
+    <ClInclude Include="include\lve_window.hpp" />
     <ClInclude Include="include\lve_device.hpp" />
   </ItemGroup>
   <ItemGroup>
