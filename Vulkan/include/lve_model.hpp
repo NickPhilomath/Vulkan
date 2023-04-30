@@ -13,54 +13,52 @@
 
 namespace lve {
 class LveModel {
- public:
-  struct Vertex {
-    glm::vec3 position{};
-    glm::vec3 color{};
-    glm::vec3 normal{};
-    glm::vec2 uv{};
+public:
+    struct Vertex {
+        glm::vec3 position{};
+        glm::vec3 color{};
+        glm::vec3 normal{};
+        glm::vec2 uv{};
 
-    static std::vector<VkVertexInputBindingDescription> getBindingDescriptions();
-    static std::vector<VkVertexInputAttributeDescription> getAttributeDescriptions();
+        static std::vector<VkVertexInputBindingDescription> getBindingDescriptions();
+        static std::vector<VkVertexInputAttributeDescription> getAttributeDescriptions();
 
-    bool operator==(const Vertex &other) const {
-      return position == other.position && color == other.color && normal == other.normal &&
-             uv == other.uv;
-    }
-  };
+        bool operator==(const Vertex &other) const {
+            return position == other.position && color == other.color && normal == other.normal && uv == other.uv;
+        }
+    };
 
-  struct Builder {
-    std::vector<Vertex> vertices{};
-    std::vector<uint32_t> indices{};
+    struct Builder {
+        std::vector<Vertex> vertices{};
+        std::vector<uint32_t> indices{};
 
-    void loadModel(const std::string &filepath);
-  };
+        void loadModel(const std::string &filepath);
+    };
 
-  LveModel(LveDevice &device, const LveModel::Builder &builder);
-  ~LveModel();
+    LveModel(LveDevice &device, const LveModel::Builder &builder);
+    ~LveModel();
 
-  LveModel(const LveModel &) = delete;
-  LveModel &operator=(const LveModel &) = delete;
+    LveModel(const LveModel &) = delete;
+    LveModel &operator=(const LveModel &) = delete;
 
-  static std::unique_ptr<LveModel> createModelFromFile(
-      LveDevice &device, const std::string &filepath);
+    static std::unique_ptr<LveModel> createModelFromFile(LveDevice &device, const std::string &filepath);
 
-  void bind(VkCommandBuffer commandBuffer);
-  void draw(VkCommandBuffer commandBuffer);
+    void bind(VkCommandBuffer commandBuffer);
+    void draw(VkCommandBuffer commandBuffer);
 
- private:
-  void createVertexBuffers(const std::vector<Vertex> &vertices);
-  void createIndexBuffers(const std::vector<uint32_t> &indices);
+private:
+    void createVertexBuffers(const std::vector<Vertex> &vertices);
+    void createIndexBuffers(const std::vector<uint32_t> &indices);
 
-  LveDevice &lveDevice;
+    LveDevice &lveDevice;
 
-  VkBuffer vertexBuffer;
-  VkDeviceMemory vertexBufferMemory;
-  uint32_t vertexCount;
+    VkBuffer vertexBuffer;
+    VkDeviceMemory vertexBufferMemory;
+    uint32_t vertexCount;
 
-  bool hasIndexBuffer = false;
-  VkBuffer indexBuffer;
-  VkDeviceMemory indexBufferMemory;
-  uint32_t indexCount;
+    bool hasIndexBuffer = false;
+    VkBuffer indexBuffer;
+    VkDeviceMemory indexBufferMemory;
+    uint32_t indexCount;
 };
 }  // namespace lve

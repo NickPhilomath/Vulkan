@@ -140,9 +140,7 @@ void LveRenderer::beginSwapChainRenderPass(VkCommandBuffer commandBuffer) {
 
 void LveRenderer::endSwapChainRenderPass(VkCommandBuffer commandBuffer) {
   assert(isFrameStarted && "Can't call endSwapChainRenderPass if frame is not in progress");
-  assert(
-      commandBuffer == getCurrentCommandBuffer() &&
-      "Can't end render pass on command buffer from a different frame");
+  assert(commandBuffer == getCurrentCommandBuffer() && "Can't end render pass on command buffer from a different frame");
   vkCmdEndRenderPass(commandBuffer);
 }
 

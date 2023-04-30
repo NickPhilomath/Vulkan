@@ -10,6 +10,7 @@ layout(location = 0) out vec3 fragColor;
 layout(push_constant) uniform Push {
   mat4 transform; // projection * view * model
   mat4 normalMatrix;
+  vec3 color;
 } push;
 
 const vec3 DIRECTION_TO_LIGHT = normalize(vec3(1.0, -3.0, -1.0));
@@ -22,5 +23,5 @@ void main() {
 
   float lightIntensity = AMBIENT + max(dot(normalWorldSpace, DIRECTION_TO_LIGHT), 0);
 
-  fragColor = lightIntensity * color;
+  fragColor = lightIntensity * push.color;
 }

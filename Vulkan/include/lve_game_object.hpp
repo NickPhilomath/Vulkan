@@ -40,7 +40,7 @@ class LveGameObject {
   id_t getId() { return id; }
 
   std::shared_ptr<LveModel> model{};
-  glm::vec3 color{};
+  glm::vec3 color{0.f};
   TransformComponent transform{};
 
  private:
