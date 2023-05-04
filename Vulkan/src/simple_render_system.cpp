@@ -55,7 +55,7 @@ void SimpleRenderSystem::createPipeline(VkRenderPass renderPass) {
   LvePipeline::defaultPipelineConfigInfo(pipelineConfig);
   pipelineConfig.renderPass = renderPass;
   pipelineConfig.pipelineLayout = pipelineLayout;
-  lvePipeline = std::make_unique<LvePipeline>(lveDevice, "shaders/simple_shader.vert.spv", "shaders/simple_shader.frag.spv", pipelineConfig);
+  lvePipeline = std::make_unique<LvePipeline>(lveDevice, "shaders/bin/simple_shader.vert.spv", "shaders/bin/simple_shader.frag.spv", pipelineConfig);
 }
 
 void SimpleRenderSystem::renderGameObjects(VkCommandBuffer commandBuffer, std::vector<LveGameObject>& gameObjects, const LveCamera& camera) {

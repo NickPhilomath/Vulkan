@@ -34,23 +34,20 @@ void FirstApp::run() {
     LveCamera camera{};
     float aspect = lveRenderer.getAspectRatio();
     camera.setPerspectiveProjection(glm::radians(50.f), aspect, 0.1f, 40.f);
-    KeyboardMovementController cameraController{};
-    
-    auto viewerObject = LveGameObject::createGameObject();
-    viewerObject.transform.translation = { 0.f, -2.f, -5.f };
+    camera.transform.translation = { 0.f, -2.f, -15.f };
 
     auto currentTime = std::chrono::high_resolution_clock::now();
 
     while (!lveWindow.shouldClose()) {
-        // get events
-        glfwPollEvents();
         // delta time 
         auto newTime = std::chrono::high_resolution_clock::now();
         float deltaTime = std::chrono::duration<float, std::chrono::seconds::period>(newTime - currentTime).count();
         currentTime = newTime;
+        // get events
+        glfwPollEvents();
         // update
-        cameraController.moveInPlaneXZ(lveWindow.getGLFWwindow(), deltaTime, viewerObject);
-        camera.setViewYXZ(viewerObject.transform.translation, viewerObject.transform.rotation);
+        camera.update(lveWindow.getGLFWwindow(), deltaTime);
+        gameObjects[0].update(deltaTime);
         // render
         if (auto commandBuffer = lveRenderer.beginFrame()) {
             lveRenderer.beginSwapChainRenderPass(commandBuffer);
@@ -91,7 +88,22 @@ void FirstApp::loadGameObjects() {
     player.transform.rotation = { 0.0f, 0.0f, 0.0f };
     player.transform.scale = { 0.5f, 0.5f, 0.5f };
     player.color = rgbToTheroOne(0, 162, 255);
+    player.gravity = 0.25f;
+    player.speed = -0.20f;
     gameObjects.push_back(std::move(player));
+
+    auto cube = LveGameObject::createGameObject();
+    cube.model = LveModel::createModelFromFile(lveDevice, "models/colored_cube.obj");
+    cube.transform.translation = { 2.0f, -1.0f, 0.0f };
+    cube.transform.rotation = { 0.0f, 0.0f, 0.0f };
+    cube.transform.scale = { 0.5f, 0.5f, 0.5f };
+    //gameObjects.push_back(std::move(cube));
+
+    auto viking_room = LveGameObject::createGameObject();
+    viking_room.model = LveModel::createModelFromFile(lveDevice, "models/viking_room.obj");
+    viking_room.transform.translation = { 3.0f, -1.0f, 0.0f };
+    viking_room.transform.rotation = { 3.14f / 2, 0.0f, 3.14f };
+    gameObjects.push_back(std::move(viking_room));
 
     auto plane = LveGameObject::createGameObject();
     plane.model = LveModel::createModelFromFile(lveDevice, "models/plane.obj");

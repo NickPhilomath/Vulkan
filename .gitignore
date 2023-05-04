@@ -6,5 +6,5 @@ bin-int
 *.rar
 *.zip
 
-# glfw and glm in libs for now
+# glfw and glm are in libs for now
 libs

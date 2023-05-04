@@ -24,28 +24,32 @@ struct TransformComponent {
 };
 
 class LveGameObject {
- public:
-  using id_t = unsigned int;
+public:
+    using id_t = unsigned int;
 
-  static LveGameObject createGameObject() {
-    static id_t currentId = 0;
-    return LveGameObject{currentId++};
-  }
+    static LveGameObject createGameObject() {
+        static id_t currentId = 0;
+        return LveGameObject{currentId++};
+    }
 
-  LveGameObject(const LveGameObject &) = delete;
-  LveGameObject &operator=(const LveGameObject &) = delete;
-  LveGameObject(LveGameObject &&) = default;
-  LveGameObject &operator=(LveGameObject &&) = default;
+    LveGameObject(const LveGameObject &) = delete;
+    LveGameObject &operator=(const LveGameObject &) = delete;
+    LveGameObject(LveGameObject &&) = default;
+    LveGameObject &operator=(LveGameObject &&) = default;
 
-  id_t getId() { return id; }
+    id_t getId() { return id; }
 
-  std::shared_ptr<LveModel> model{};
-  glm::vec3 color{0.f};
-  TransformComponent transform{};
+    void update(float dt);
 
- private:
-  LveGameObject(id_t objId) : id{objId} {}
+    std::shared_ptr<LveModel> model{};
+    glm::vec3 color{0.f};
+    TransformComponent transform{};
 
-  id_t id;
+    float gravity = 0, speed = 0;
+
+private:
+    LveGameObject(id_t objId) : id{ objId } {}
+
+    id_t id;
 };
 }  // namespace lve

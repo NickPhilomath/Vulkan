@@ -1,5 +1,7 @@
 #include "lve_game_object.hpp"
 
+#include <iostream>
+
 namespace lve {
 
 glm::mat4 TransformComponent::mat4() {
@@ -57,6 +59,12 @@ glm::mat3 TransformComponent::normalMatrix() {
           invScale.z * (c1 * c2),
       },
   };
+}
+
+void LveGameObject::update(float dt) {
+    speed += gravity * dt;
+    transform.translation.y += speed;
+    if (transform.translation.y > 0.f) { transform.translation.y = 0.f; speed = -0.9 * speed; }
 }
 
 }  // namespace lve

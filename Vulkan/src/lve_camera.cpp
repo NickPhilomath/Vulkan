@@ -77,4 +77,9 @@ void LveCamera::setViewYXZ(glm::vec3 position, glm::vec3 rotation) {
   viewMatrix[3][2] = -glm::dot(w, position);
 }
 
+void LveCamera::update(GLFWwindow* window, float dt) {
+    controller.moveInPlaneXZ(window, dt, transform);
+    setViewYXZ(transform.translation, transform.rotation);
+}
+
 }  // namespace lve
