@@ -103,6 +103,7 @@ void FirstApp::loadGameObjects() {
     viking_room.model = LveModel::createModelFromFile(lveDevice, "models/viking_room.obj");
     viking_room.transform.translation = { 3.0f, -1.0f, 0.0f };
     viking_room.transform.rotation = { 3.14f / 2, 0.0f, 3.14f };
+    viking_room.color = rgbToTheroOne(0, 162, 255);
     gameObjects.push_back(std::move(viking_room));
 
     auto plane = LveGameObject::createGameObject();

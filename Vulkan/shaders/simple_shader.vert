@@ -23,5 +23,5 @@ void main() {
 
   float lightIntensity = AMBIENT + max(dot(normalWorldSpace, DIRECTION_TO_LIGHT), 0);
 
-  fragColor = lightIntensity * color; // push.color
+  fragColor = lightIntensity * push.color; // color
 }

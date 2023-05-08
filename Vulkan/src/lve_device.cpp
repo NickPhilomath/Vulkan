@@ -131,6 +131,9 @@ void LveDevice::pickPhysicalDevice() {
 
   vkGetPhysicalDeviceProperties(physicalDevice, &properties);
   std::cout << "physical device: " << properties.deviceName << std::endl;
+
+  //VkPhysicalDeviceFeatures features;
+  //vkGetPhysicalDeviceFeatures(physicalDevice, &features);
 }
 
 void LveDevice::createLogicalDevice() {
@@ -209,8 +212,7 @@ bool LveDevice::isDeviceSuitable(VkPhysicalDevice device) {
   VkPhysicalDeviceFeatures supportedFeatures;
   vkGetPhysicalDeviceFeatures(device, &supportedFeatures);
 
-  return indices.isComplete() && extensionsSupported && swapChainAdequate &&
-         supportedFeatures.samplerAnisotropy;
+  return indices.isComplete() && extensionsSupported && swapChainAdequate && supportedFeatures.samplerAnisotropy;
 }
 
 void LveDevice::populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT &createInfo) {
