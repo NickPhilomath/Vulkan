@@ -169,7 +169,9 @@
     <ClCompile Include="src\gui\imgui_tables.cpp" />
     <ClCompile Include="src\gui\imgui_widgets.cpp" />
     <ClCompile Include="src\keyboard_movement_controller.cpp" />
+    <ClCompile Include="src\lve_buffer.cpp" />
     <ClCompile Include="src\lve_camera.cpp" />
+    <ClCompile Include="src\lve_descriptors.cpp" />
     <ClCompile Include="src\lve_game_object.cpp" />
     <ClCompile Include="src\lve_model.cpp" />
     <ClCompile Include="src\lve_renderer.cpp" />
@@ -194,7 +196,10 @@
     <ClInclude Include="include\gui\imstb_textedit.h" />
     <ClInclude Include="include\gui\imstb_truetype.h" />
     <ClInclude Include="include\keyboard_movement_controller.hpp" />
+    <ClInclude Include="include\lve_buffer.hpp" />
     <ClInclude Include="include\lve_camera.hpp" />
+    <ClInclude Include="include\lve_descriptors.hpp" />
+    <ClInclude Include="include\lve_frame_info.hpp" />
     <ClInclude Include="include\lve_game_object.hpp" />
     <ClInclude Include="include\lve_model.hpp" />
     <ClInclude Include="include\lve_renderer.hpp" />

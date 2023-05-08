@@ -6,7 +6,7 @@
 namespace lve {
 
 void KeyboardMovementController::moveInPlaneXZ(GLFWwindow* window, float dt, TransformComponent& transform) {
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    //glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     // handle mouse move
     double mouseX, mouseY;
     glfwGetCursorPos(window, &mouseX, &mouseY);
