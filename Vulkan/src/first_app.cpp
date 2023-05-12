@@ -16,7 +16,9 @@
 #include <chrono>
 #include <stdexcept>
 
+#ifdef _DEBUG
 #include <iostream>
+#endif
 
 glm::vec3 rgbToTheroOne(int r, int g, int b) {
     return glm::vec3{ r / 255.f, g / 255.f, b / 255.f };

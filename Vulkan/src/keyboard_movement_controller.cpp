@@ -3,6 +3,10 @@
 // std
 #include <limits>
 
+#ifdef _DEBUG
+#include <iostream>
+#endif
+
 namespace lve {
 
 void KeyboardMovementController::moveInPlaneXZ(GLFWwindow* window, float dt, TransformComponent& transform) {
@@ -13,21 +17,23 @@ void KeyboardMovementController::moveInPlaneXZ(GLFWwindow* window, float dt, Tra
     float deltaMX = mouseX - lastMousePos.x, deltaMY = mouseY - lastMousePos.y;
     lastMousePos = glm::vec2{ mouseX, mouseY };
 
-    glm::vec3 rotate{0};
-    //if (glfwGetKey(window, keys.lookRight) == GLFW_PRESS) rotate.y += 1.f;
-    //if (glfwGetKey(window, keys.lookLeft) == GLFW_PRESS) rotate.y -= 1.f;
-    //if (glfwGetKey(window, keys.lookUp) == GLFW_PRESS) rotate.x += 1.f;
-    //if (glfwGetKey(window, keys.lookDown) == GLFW_PRESS) rotate.x -= 1.f;
-    rotate.y += deltaMX;
-    rotate.x -= deltaMY;
+    if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
+        glm::vec3 rotate{0};
+        //if (glfwGetKey(window, keys.lookRight) == GLFW_PRESS) rotate.y += 1.f;
+        //if (glfwGetKey(window, keys.lookLeft) == GLFW_PRESS) rotate.y -= 1.f;
+        //if (glfwGetKey(window, keys.lookUp) == GLFW_PRESS) rotate.x += 1.f;
+        //if (glfwGetKey(window, keys.lookDown) == GLFW_PRESS) rotate.x -= 1.f;
+        rotate.y += deltaMX;
+        rotate.x -= deltaMY;
 
-    if (glm::dot(rotate, rotate) > std::numeric_limits<float>::epsilon()) {
-        transform.rotation += lookSpeed * dt * rotate;//glm::normalize(rotate);
+        if (glm::dot(rotate, rotate) > std::numeric_limits<float>::epsilon()) {
+            transform.rotation += lookSpeed * dt * rotate;//glm::normalize(rotate);
+        }
+
+        // limit pitch values between about +/- 85ish degrees
+        transform.rotation.x = glm::clamp(transform.rotation.x, -1.5f, 1.5f);
+        transform.rotation.y = glm::mod(transform.rotation.y, glm::two_pi<float>());
     }
-
-    // limit pitch values between about +/- 85ish degrees
-    transform.rotation.x = glm::clamp(transform.rotation.x, -1.5f, 1.5f);
-    transform.rotation.y = glm::mod(transform.rotation.y, glm::two_pi<float>());
 
     float yaw = transform.rotation.y;
     const glm::vec3 forwardDir{sin(yaw), 0.f, cos(yaw)};

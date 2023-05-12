@@ -14,12 +14,7 @@ namespace lve {
         class Builder {
         public:
             Builder(LveDevice& lveDevice) : lveDevice{ lveDevice } {}
-
-            Builder& addBinding(
-                uint32_t binding,
-                VkDescriptorType descriptorType,
-                VkShaderStageFlags stageFlags,
-                uint32_t count = 1);
+            Builder& addBinding(uint32_t binding, VkDescriptorType descriptorType, VkShaderStageFlags stageFlags, uint32_t count = 1);
             std::unique_ptr<LveDescriptorSetLayout> build() const;
 
         private:
@@ -27,8 +22,7 @@ namespace lve {
             std::unordered_map<uint32_t, VkDescriptorSetLayoutBinding> bindings{};
         };
 
-        LveDescriptorSetLayout(
-            LveDevice& lveDevice, std::unordered_map<uint32_t, VkDescriptorSetLayoutBinding> bindings);
+        LveDescriptorSetLayout(LveDevice& lveDevice, std::unordered_map<uint32_t, VkDescriptorSetLayoutBinding> bindings);
         ~LveDescriptorSetLayout();
         LveDescriptorSetLayout(const LveDescriptorSetLayout&) = delete;
         LveDescriptorSetLayout& operator=(const LveDescriptorSetLayout&) = delete;
@@ -61,17 +55,12 @@ namespace lve {
             VkDescriptorPoolCreateFlags poolFlags = 0;
         };
 
-        LveDescriptorPool(
-            LveDevice& lveDevice,
-            uint32_t maxSets,
-            VkDescriptorPoolCreateFlags poolFlags,
-            const std::vector<VkDescriptorPoolSize>& poolSizes);
+        LveDescriptorPool(LveDevice& lveDevice, uint32_t maxSets, VkDescriptorPoolCreateFlags poolFlags, const std::vector<VkDescriptorPoolSize>& poolSizes);
         ~LveDescriptorPool();
         LveDescriptorPool(const LveDescriptorPool&) = delete;
         LveDescriptorPool& operator=(const LveDescriptorPool&) = delete;
 
-        bool allocateDescriptor(
-            const VkDescriptorSetLayout descriptorSetLayout, VkDescriptorSet& descriptor) const;
+        bool allocateDescriptor(const VkDescriptorSetLayout descriptorSetLayout, VkDescriptorSet& descriptor) const;
 
         void freeDescriptors(std::vector<VkDescriptorSet>& descriptors) const;
 
